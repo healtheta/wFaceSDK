@@ -70,12 +70,12 @@ def update():
 	content = request.json
 	id = content['id']
 	image = content['image']
-	format, imgstr = image.split(';base64,') 	
-	ext = format.split('/')[-1] 	
-	image = base64.b64decode(imgstr)
-	n = random.randint(0,100000);
-	file_name = str(n) + "." + ext	
-	x = UPDATE(id, image, file_name)
+	#format, imgstr = image.split(';base64,') 	
+	#ext = format.split('/')[-1] 	
+	#image = base64.b64decode(imgstr)
+	#n = random.randint(0,100000);
+	#file_name = str(n) + "." + ext	
+	x = UPDATE(id, image)
 	if x:
 		return jsonify(
 			id =id,
@@ -102,18 +102,18 @@ def train():
 def predict():
 	content = request.json
 	image = content['image']
-	format, imgstr = image.split(';base64,') 	
-	ext = format.split('/')[-1] 	
-	image = base64.b64decode(imgstr)
-	n = random.randint(0,100000);
-	file_name = str(n) + "." + ext	
-	full_filename = os.path.join("tmp", file_name)
-	with open(full_filename,"wb") as fo:
-		fo.write(image)
+	#format, imgstr = image.split(';base64,') 	
+	#ext = format.split('/')[-1] 	
+	#image = base64.b64decode(imgstr)
+	#n = random.randint(0,100000);
+	#file_name = str(n) + "." + ext	
+	#full_filename = os.path.join("tmp", file_name)
+	#with open(full_filename,"wb") as fo:
+	#	fo.write(image)
 		
-	id = PREDICT(full_filename)
+	id = PREDICT(image)
 	CLEAR()	
-	
+	full_filename = 'pragash'
 	if CONFIRM(full_filename, id):
 		return jsonify(
 			id =id,

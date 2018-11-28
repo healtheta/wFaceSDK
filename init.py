@@ -67,3 +67,14 @@ def init():
 	data = load_metadata('images')
 	
 	return [model, data]
+	
+def init_model():
+	if not os.path.exists(dst_file):
+		os.makedirs(dst_dir)
+		download_landmarks(dst_file)
+	else:
+		print("landmark_file already downloaded")
+		
+	model = create_model()
+	model.load_weights('weights/nn4.small2.v1.h5')	
+	return model
